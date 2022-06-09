@@ -64,11 +64,19 @@ def afficher_grille(grille):
 gril = [' ' for i in range(100)]
 
 def main_fucntion():
+    print("print 'q' to quit")
     game = True
+    key = ""
 
     while (game == True):
         afficher_grille(gril)
+        key = input("enter a coordonate:")
+        try:
+            int(key)
+        except:
+            if key == "q":
+                return (0)
+        continue
     return (0)
-
 
 main_fucntion()

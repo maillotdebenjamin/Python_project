@@ -54,9 +54,8 @@ def est_gagnant(grille):
         return 1
     if (grille[2]==grille[4]) and (grille[2]==grille[6]) and (grille[2]!=" "):
         return 1
-            
- 
- 
+
+
 def est_match_nul(grille):
     for i in range(9):
         if grille[i]==" ":

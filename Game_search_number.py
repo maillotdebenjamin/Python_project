@@ -2,10 +2,19 @@
 
 from random import randint
 A = randint(0 , 100)
-print(A)
+
 nombre = 0
+print("enter 'q' to quit")
 while nombre != A:
-    nombre = int(input( "entrer un nombre "))
+    nombre = input( "entrer un nombre :")
+    try:
+        nombre = int(nombre)
+    except:
+        print(nombre)
+        if (nombre == "q"):
+            break
+        print("bad number")
+        continue
     if nombre > A:
         print(" plus petit")
     else:
