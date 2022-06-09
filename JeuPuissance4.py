@@ -1,3 +1,4 @@
+#!/usr/bin/python
 
 def afficher_grille(grille):
     print("     0)  1)  2)  3)  4)  5)  6)")
@@ -34,7 +35,6 @@ def afficher_grille(grille):
     print("   -----------------------------")
 
 def case_est_vide(grille,colonne,ligne):
-    print(ligne)
     if ligne < 0:
         return True
     if grille[int(colonne)+int(ligne)*7]!=" ":
@@ -139,7 +139,7 @@ def est_gagnant(grille):
     if (grille[19]==grille[26]) and (grille[19]==grille[33]) and (grille[19]==grille[40]) and (grille[19]!=" "):
         return 1
 
-    if (grille[6]==grille[13]) and (grille[6]==grille[20]) and (grille[6]==grille[275]) and (grille[6]!=" "):
+    if (grille[6]==grille[13]) and (grille[6]==grille[20]) and (grille[6]==grille[27]) and (grille[6]!=" "):
         return 1
     if (grille[13]==grille[20]) and (grille[13]==grille[27]) and (grille[13]==grille[34]) and (grille[13]!=" "):
         return 1
@@ -159,14 +159,14 @@ def est_gagnant(grille):
         return 1
     if (grille[16]==grille[24]) and (grille[16]==grille[32]) and (grille[16]==grille[40]) and (grille[16]!=" "):
         return 1
-    
+
     if (grille[1]==grille[9]) and (grille[1]==grille[17]) and (grille[1]==grille[25]) and (grille[1]!=" "):
         return 1
     if (grille[9]==grille[17]) and (grille[9]==grille[25]) and (grille[9]==grille[33]) and (grille[9]!=" "):
         return 1
     if (grille[17]==grille[25]) and (grille[17]==grille[33]) and (grille[17]==grille[41]) and (grille[17]!=" "):
         return 1
-    
+
     if (grille[2]==grille[10]) and (grille[2]==grille[18]) and (grille[2]==grille[26]) and (grille[2]!=" "):
         return 1
     if (grille[10]==grille[18]) and (grille[10]==grille[26]) and (grille[10]==grille[34]) and (grille[10]!=" "):
@@ -174,19 +174,35 @@ def est_gagnant(grille):
     if (grille[3]==grille[11]) and (grille[3]==grille[19]) and (grille[3]==grille[27]) and (grille[3]!=" "):
         return 1
 
+def recup_coord(colonne):
+    while (1):
+        colonne = input("Entrez le numero de la colonne : ")
+        try:
+            colonne = int(colonne)
+            if (colonne > 6 or colonne < 0):
+                print("please enter a good number")
+                continue
+            return (colonne)
+        except:
+            print("please enter a good number")
+            continue
+
 def tour(grille, joueur, ligne = 5):
+    colonne = ""
     print("C'est le tour du joueur "+str(joueur))
-    colonne=input("Entrez le numero de la colonne : ")
-    print("Vous avez joué la case ("+colonne+")")
-    if grille[int(colonne)+int(ligne)*7]!=" ":
+    colonne = recup_coord(colonne)
+    print(f"Vous avez joué la case {colonne}")
+    if grille[int(colonne)+int(ligne)*7] != " ":
         while not case_est_vide(grille,colonne,ligne):
             ligne -= 1
         if ligne == -1:
             print("plus de place dans cette colonne")
             tour(grille, joueur, 5)
     if joueur==1 :
+
         grille[int(colonne)+int(ligne)*7]="X"
     if joueur==2 :
+
         grille[int(colonne)+int(ligne)*7]="O"
     afficher_grille(grille)
 
@@ -196,10 +212,9 @@ joueur=1
 print("Le joueur 1 possède les X. Le joueur 2 possède les O")
 grille=[" " for i in range(42)]
 print(afficher_grille(grille))
-#tour(grille,joueur)
-gagne=0
-while gagne==0:
-    tour(grille,joueur)
+gagne = 0
+while gagne == 0:
+    tour(grille, joueur)
     if est_gagnant(grille):
         print("Le joueur "+str(joueur)+" remporte la partie")
         gagne=1
